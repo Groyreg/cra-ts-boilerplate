@@ -1,0 +1,7 @@
+src/registerServiceWorker.js
+src/serviceWorker.js
+src/index.js
+src/App.test.js
+src/services/config/dev-config.json
+/scripts/**
+/config/**
