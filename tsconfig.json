@@ -1,57 +1,25 @@
 {
   "compilerOptions": {
-    "outDir": "build/dist",
-    "module": "esnext",
+    "module": "ESNext",
+    "outDir": "lib",
     "target": "es5",
-    "lib": [
-      "es6",
-      "dom"
-    ],
-    "sourceMap": true,
+    "lib": ["es2017", "dom", "dom.iterable", "esnext"],
     "allowJs": true,
-    "jsx": "preserve",
-    "moduleResolution": "node",
-    "rootDir": "src",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "noUnusedParameters": true,
-    "importHelpers": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "@app/*": ["src/*"],
-      "@assets/*": ["src/assets/*"],
-      "@fonts/*": ["src/assets/fonts/*"],
-      "@components/*": ["src/components/*"],
-      "@models/*": ["src/models/*"],
-      "@scenes/*": ["src/scenes/*"],
-      "@services/*": ["src/services/*"],
-      "@constants/*": ["src/constants/*"],
-      "@images/*": ["src/assets/images/*"],
-      "@libs/*": ["src/assets/libs/*"],
-      "@store/*": ["src/store/*"],
-      "@styles/*": ["src/styles/*"]
-    }
+    "declaration": true,
+    "noEmitOnError": true,
+    "jsx": "react-jsx",
+    "sourceMap": true,
+    "noImplicitAny": false
   },
-  "exclude": [
-    "node_modules",
-    "build",
-    "scripts",
-    "webpack",
-    "jest"
-  ],
-  "include": [
-    "src"
-  ]
+  "include": ["src"],
+  "extends": "./alias.json"
 }

@@ -1,119 +1,123 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true,
-    jest: true,
+    es2021: true,
   },
   extends: [
     'airbnb',
-    'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
-    'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
-    'prettier/@typescript-eslint', // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
-    'plugin:prettier/recommended', // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
-    'prettier',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:typescript-sort-keys/recommended',
   ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
+  overrides: [
+    // override "simple-import-sort" config
+    {
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      rules: {
+        'simple-import-sort/imports': [
+          'error',
+          {
+            groups: [
+              // Packages `react` related packages come first.
+              ['^react', '^@?\\w'],
+              // Internal packages.
+              ['^(@|components)(/.*|$)'],
+              // Side effect imports.
+              ['^\\u0000'],
+              // Parent imports. Put `..` last.
+              ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+              // Other relative imports. Put same-folder imports and `.` last.
+              ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+              // Style imports.
+              ['^.+\\.?(css)$'],
+            ],
+          },
+        ],
+      },
+    },
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    project: './tsconfig.json',
-    ecmaVersion: 2018,
+    ecmaVersion: 'latest',
+    react: {
+      version: 'detect',
+    },
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier', '@typescript-eslint', 'react-hooks'],
+  plugins: ['@typescript-eslint', 'react', 'simple-import-sort', 'sort-keys-fix', 'typescript-sort-keys', 'lint-local'],
+  root: true,
   rules: {
-    'prettier/prettier': [
-      0,
+    '@typescript-eslint/explicit-function-return-type': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/no-unused-vars': 'error',
+    // return function type
+    'import/extensions': [
+      // initial config
+      'error',
+      'ignorePackages',
       {
-        semi: true,
-        singleQuote: true,
-        trailingComma: 'es5',
-        printWidth: 100,
-        tabWidth: 2,
-        jsxSingleQuote: false,
-        jsxBracketSameLine: true,
-        arrowParens: 'avoid',
+        ts: 'never',
+        tsx: 'never',
       },
     ],
-    semi: 0,
-    eqeqeq: [1, 'always'],
-    quotes: [1, 'single'],
-    'jsx-quotes': [2, 'prefer-double'],
-    'no-undef': 0,
-    'no-console': 1,
-    'no-unused-vars': 0,
-    'no-mixed-operators': [
-      1,
+
+    'lint-local/custom-max-lines-per-function': [
+      'error',
       {
-        allowSamePrecedence: true,
+        functionsMaxLines: 35,
+        reactComponentMaxLines: 200,
+        reactHooksCallbackMaxLines: 1,
       },
     ],
-    'eol-last': [2, 'always'],
-    'no-confusing-arrow': 0,
-    'arrow-parens': [2, 'as-needed'],
-    'arrow-spacing': ['error', { before: true, after: true }],
-    'arrow-body-style': [2, 'as-needed'],
-    'react/jsx-wrap-multilines': 0,
-    'react/no-extra-parens': 0,
-    'no-param-reassign': 0,
-    'prefer-template': 0,
-    'prefer-promise-reject-errors': 0,
-    'no-script-url': 0,
-    'no-unused-expressions': 0,
-    'import/extensions': 0,
-    'import/prefer-default-export': 0,
-    'import/no-useless-path-segments': 1,
-    'import/no-unresolved': 0,
-    'import/no-extraneous-dependencies': 0,
-    'import/no-named-as-default': 0,
-    'import/no-duplicates': 0,
-    'import/order': 0,
-    'import/newline-after-import': 1,
-    'import/no-named-as-default-member': 0,
-    'import/namespace': 0,
-    'import/named': 0,
-    'jsx-a11y/anchor-is-valid': 0,
-    'jsx-a11y/click-events-have-key-events': 0,
-    'jsx-a11y/no-noninteractive-element-interactions': 0,
-    'jsx-a11y/no-static-element-interactions': 0,
-    'jsx-a11y/label-has-for': 0,
-    'jsx-a11y/label-has-associated-control': 0,
-    'jsx-a11y/iframe-has-title': 0,
-    'jsx-a11y/control-has-associated-label': 0,
-    'react/jsx-filename-extension': 0,
-    'react/jsx-indent': 0,
-    'react/jsx-boolean-value': 0,
-    'react/jsx-closing-tag-location': 0,
-    'react/button-has-type': 0,
-    'react/prop-types': 0,
-    'react/jsx-tag-spacing': [2, { beforeSelfClosing: 'always' }],
-    'react/jsx-one-expression-per-line': 0,
-    'react/jsx-curly-spacing': 0,
-    'react/no-access-state-in-setstate': 0,
-    'react/destructuring-assignment': 0,
-    'react/jsx-no-bind': 0,
-    'react/require-default-props': 0,
-    'react/display-name': 0,
-    'react/jsx-first-prop-new-line': 0,
-    'react/jsx-props-no-spreading': 0,
-    'react/static-property-placement': 0,
-    'react/state-in-constructor': 0,
-    '@typescript-eslint/indent': 0,
-    '@typescript-eslint/camelcase': 0,
-    '@typescript-eslint/explicit-function-return-type': 0,
-    '@typescript-eslint/no-non-null-assertion': 0,
-    '@typescript-eslint/no-use-before-define': 0,
-    '@typescript-eslint/member-delimiter-style': 0,
-    '@typescript-eslint/no-unused-vars': 0,
-    '@typescript-eslint/no-explicit-any': 0,
-    '@typescript-eslint/explicit-member-accessibility': 0,
-    '@typescript-eslint/no-angle-bracket-type-assertion': 0,
-    '@typescript-eslint/no-empty-interface': 0,
-    '@typescript-eslint/ban-ts-ignore': 0,
+    'lint-local/group-hooks': ['error'],
+    'lint-local/hooks-typings': 'error',
+    'lint-local/no-inline-callbacks': 'error',
+    'lint-local/no-literal-types': 'error',
+    'lint-local/no-statement-inside-statements': 'error',
+    'lint-local/sort-methods': 'error',
+    'lint-local/spacing-control': 'error',
+    'newline-before-return': 'error',
+    'no-console': 'warn',
+    'no-useless-return': 'error',
+    'prefer-destructuring': [
+      'error',
+      {
+        AssignmentExpression: {
+          array: true,
+          object: true,
+        },
+        VariableDeclarator: {
+          array: true,
+          object: true,
+        },
+      },
+      {
+        enforceForRenamedProperties: true,
+      },
+    ],
+    'react/function-component-definition': ['error', { namedComponents: 'arrow-function' }],
+    'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.ts', '.js', '.jsx'] }], // initial config
+    'react/jsx-one-expression-per-line': 'off', // conflict with prettier
+    'react/react-in-jsx-scope': 'off', // initial config
+    'simple-import-sort/exports': 'error',
+    'simple-import-sort/imports': 'error',
+    'sort-keys': ['error', 'asc', { caseSensitive: true, minKeys: 2, natural: true }],
+    'sort-keys-fix/sort-keys-fix': 'error',
+    'typescript-sort-keys/interface': 'error',
+    'typescript-sort-keys/string-enum': 'error',
+  },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+      },
+    },
   },
 };

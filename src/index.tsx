@@ -1,29 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
-import { CookiesProvider } from 'react-cookie';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 
-import configureStore from '@store/index';
-import Search from '@components/Search/Search';
+import App from './App';
 
-import './index.css';
+const root = createRoot(document.getElementById('root') as HTMLElement);
 
-// Main style file
-import '@styles/index.scss';
-
-export const { store, history } = configureStore();
-
-const App: React.FC = () => (
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <CookiesProvider>
-        <section className="app">
-          <Search />
-        </section>
-      </CookiesProvider>
-    </ConnectedRouter>
-  </Provider>
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
 );
-
-ReactDOM.render(<App />, document.getElementById('root'));

@@ -2,15 +2,18 @@
 
 # dependencies
 /node_modules
-/mock-server/node_modules
 /.pnp
 .pnp.js
-.idea/
+
+
 # testing
 /coverage
 
 # production
 /build
+
+# IDEA config files
+.idea/
 
 # misc
 .DS_Store
