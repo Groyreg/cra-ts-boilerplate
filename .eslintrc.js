@@ -80,8 +80,11 @@ module.exports = {
     'lint-local/no-statement-inside-statements': 'error',
     'lint-local/sort-methods': 'error',
     'lint-local/spacing-control': 'error',
+    'max-len': 'off',
     'newline-before-return': 'error',
     'no-console': 'warn',
+    'no-unused-expressions': 'off',
+    'no-use-before-define': 'off',
     'no-useless-return': 'error',
     'prefer-destructuring': [
       'error',
