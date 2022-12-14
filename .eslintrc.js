@@ -102,10 +102,13 @@ module.exports = {
     'react/function-component-definition': ['error', { namedComponents: 'arrow-function' }],
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.ts', '.js', '.jsx'] }], // initial config
     'react/jsx-one-expression-per-line': 'off', // conflict with prettier
+    'react/jsx-sort-props': 'error',
     'react/react-in-jsx-scope': 'off', // initial config
     'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': 'error',
-    'sort-keys': ['error', 'asc', { caseSensitive: true, minKeys: 2, natural: true }],
+    'sort-keys': ['error', 'asc', {
+      allowLineSeparatedGroups: true, caseSensitive: true, minKeys: 2, natural: true,
+    }],
     'sort-keys-fix/sort-keys-fix': 'error',
     'typescript-sort-keys/interface': 'error',
     'typescript-sort-keys/string-enum': 'error',
